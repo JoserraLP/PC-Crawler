@@ -1,1 +1,5 @@
 *.txt
+
+
+!.gitignore
+!file_ext_ignore.txt

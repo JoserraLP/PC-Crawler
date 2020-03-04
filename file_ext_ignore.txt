@@ -1,0 +1,14 @@
+.mp3
+.exe
+.bin
+.bat
+.zip
+.mp4
+.rar
+.psd
+.jpg
+.jpeg
+.png
+.pdf
+.ppt
+.pptx

@@ -1,5 +1,4 @@
-*.txt
+PC-Crawler.txt
 
 
 !.gitignore
-!file_ext_ignore.txt

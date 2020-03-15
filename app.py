@@ -10,6 +10,7 @@ if __name__ == "__main__":
     while True:
         word=input("\nIntroduzca su busqueda: \n(Salir => /exit)\nWord: ")
         if (word != '/exit'):
-            print(f'Freq: {words_freq.get(word)}')
+            freq = words_freq.get(word)
+            print(f'Freq: {freq}') if freq is not None else print(f'Freq: 0')
         else:
             break

@@ -1,5 +1,5 @@
 from os import listdir, path
-import sys, re, json
+import sys, re, json, unidecode
 
 def getWordFrequencyOnDirectory(directory,file_ext_accept=(),wordsMap=dict()):
     for file in listdir(directory):
@@ -7,12 +7,13 @@ def getWordFrequencyOnDirectory(directory,file_ext_accept=(),wordsMap=dict()):
         if path.isdir(dirFile):
             getWordFrequencyOnDirectory(dirFile,file_ext_accept=file_ext_accept,wordsMap=wordsMap)
         else:
+            print(dirFile)
             if dirFile.endswith(file_ext_accept):
                 processFile(dirFile,wordsMap)
 
 def processFile(filename, wordsMap):
-    with open(filename) as file:
-        words = [word.lower() for word in re.split(r'\W+',file.read())]
+    with open(filename, encoding='utf-8') as file:
+        words = [word.lower() for word in re.split(r'\W+',unidecode.unidecode(file.read()))]
         for word in words:
             updateMap(word,wordsMap)
 

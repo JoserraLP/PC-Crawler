@@ -1,4 +1,5 @@
 import unidecode
+
 def createThesaurus(filename):
     thesaurus_dict=dict()
     with open(filename,encoding='utf-8') as thesaurus_file:

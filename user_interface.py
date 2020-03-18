@@ -8,6 +8,7 @@ class UserInterface:
     def __init__(self, thesaurus, crawler):
         self.thesaurus = thesaurus
         self.crawler = crawler
+        self.words_freq = dict()
 
     def get_dir_file(self):
         """
@@ -26,9 +27,9 @@ class UserInterface:
         """
         Search a word in the map and get its frequency. The word is selected in the UI
         """
-        word = self.win.search_text.toPlainText()
+        word = self.win.search_text.toPlainText().lower()
         self.win.list_results.clear()
-        if not self.words_freq is None:
+        if not self.words_freq is None and word != '':
             sinonims = self.thesaurus.get(word)
             total_freq = 0
             if(sinonims is not None):
@@ -41,6 +42,10 @@ class UserInterface:
                 self.win.total_frequency.setText(str(total_freq))
             else:
                 self.win.list_results.addItem('No se ha encontrado la palabra buscada')
+                total_freq = 0
+        else:
+            self.win.list_results.addItem('Por favor, busca una palabra')
+            total_freq = 0
 
     def loadGUI(self):
         """

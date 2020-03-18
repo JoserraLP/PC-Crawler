@@ -7,7 +7,6 @@ class Crawler:
         self.file_ext_accept = file_ext_accept
         self.accepted_words = accepted_words
         self.words_map = dict()
-        self.files_count = 0
 
     def get_word_frequency(self, name):
         """
@@ -97,9 +96,3 @@ class Crawler:
             json.dump(dict(sorted(self.words_map.items())),file)
         
         return self.words_map
-    
-    def get_files_count(self):
-        """
-        Returns the number of proccesed files
-        """
-        return self.files_count

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>375</width>
-    <height>350</height>
+    <width>350</width>
+    <height>321</height>
    </rect>
   </property>
   <property name="font">
@@ -32,11 +32,11 @@
 QLabel {
 	color:white;
 }
-#selectedDir{
+#selected_name{
 	padding-left:4px;
 	color:#666666;
 }
-#selectedDir, #searchText{
+#selected_name, #search_text{
 	background: white;
 	border: #666666;
 	border-radius: 6;
@@ -56,7 +56,7 @@ QPushButton:pressed{
 #results{
 	color:white;
 }
-#listResults{
+#list_results{
 	color:white;
 	background: #222222;
 	border: None;
@@ -65,8 +65,8 @@ QPushButton:pressed{
   <widget class="QPushButton" name="search_button">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>110</y>
+     <x>280</x>
+     <y>80</y>
      <width>61</width>
      <height>31</height>
     </rect>
@@ -132,8 +132,8 @@ QPushButton:pressed{
   <widget class="QGroupBox" name="results">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>170</y>
+     <x>10</x>
+     <y>140</y>
      <width>331</width>
      <height>161</height>
     </rect>
@@ -167,8 +167,8 @@ QPushButton:pressed{
   <widget class="QTextEdit" name="search_text">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>110</y>
+     <x>10</x>
+     <y>80</y>
      <width>281</width>
      <height>31</height>
     </rect>
@@ -201,7 +201,7 @@ QPushButton:pressed{
     <rect>
      <x>90</x>
      <y>50</y>
-     <width>231</width>
+     <width>161</width>
      <height>21</height>
     </rect>
    </property>
@@ -224,7 +224,7 @@ QPushButton:pressed{
   <widget class="QPushButton" name="load_files_btn">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>230</x>
      <y>50</y>
      <width>31</width>
      <height>21</height>
@@ -237,8 +237,8 @@ QPushButton:pressed{
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>330</y>
+     <x>10</x>
+     <y>300</y>
      <width>331</width>
      <height>20</height>
     </rect>
@@ -263,7 +263,7 @@ QPushButton:pressed{
     <rect>
      <x>10</x>
      <y>30</y>
-     <width>361</width>
+     <width>331</width>
      <height>20</height>
     </rect>
    </property>
@@ -274,8 +274,8 @@ QPushButton:pressed{
   <widget class="QLabel" name="total_frequency">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>150</y>
+     <x>315</x>
+     <y>120</y>
      <width>31</width>
      <height>20</height>
     </rect>
@@ -301,8 +301,8 @@ QPushButton:pressed{
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>205</x>
-     <y>150</y>
+     <x>200</x>
+     <y>120</y>
      <width>111</width>
      <height>20</height>
     </rect>
@@ -319,59 +319,11 @@ QPushButton:pressed{
     <string>Frecuencia total</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_6">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>80</y>
-     <width>151</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Montserrat</family>
-     <pointsize>10</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Ficheros procesados</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="total_files">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>80</y>
-     <width>31</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Montserrat</family>
-     <pointsize>10</pointsize>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>0</string>
-   </property>
-   <property name="textFormat">
-    <enum>Qt::PlainText</enum>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QCheckBox" name="is_file">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>80</y>
+     <x>270</x>
+     <y>51</y>
      <width>71</width>
      <height>17</height>
     </rect>
@@ -793,7 +745,7 @@ QPushButton:pressed{
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
+     <family>Montserrat</family>
      <pointsize>10</pointsize>
      <weight>75</weight>
      <bold>true</bold>
@@ -812,8 +764,6 @@ QPushButton:pressed{
   <zorder>line</zorder>
   <zorder>total_frequency</zorder>
   <zorder>label_5</zorder>
-  <zorder>label_6</zorder>
-  <zorder>total_files</zorder>
   <zorder>is_file</zorder>
   <zorder>selected_name</zorder>
   <zorder>load_files_btn</zorder>

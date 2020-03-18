@@ -82,8 +82,8 @@ class Crawler:
         Parameters: 
         dir_name (str): name of the directory to be processed 
         """
+        dir_name_cache = dir_name.replace('\\', '').replace('/','').replace('.', '').replace(':', '-')
         try:
-            dir_name_cache = dir_name.replace('\\', '').replace('.', '').replace(':', '-')
             dict_file = open(f'.cache/{dir_name_cache}.cache', 'r')
             self.words_map = json.load(dict_file)
             print(f'Loaded file .cache/{dir_name_cache}.cache')

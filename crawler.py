@@ -7,6 +7,7 @@ class Crawler:
         self.file_ext_accept = file_ext_accept
         self.accepted_words = accepted_words
         self.words_map = dict()
+        self.files_count = 0
 
     def get_word_frequency(self, name):
         """
@@ -53,6 +54,7 @@ class Crawler:
         file_name (str): name of the file to be processed 
         """
         with open(file_name, encoding='utf-8') as file:
+            self.files_count += 1
             words = [word.lower() for word in re.split(r'\W+',unidecode.unidecode(file.read()))]
             for word in words:
                 self.update_map(word)
@@ -87,6 +89,7 @@ class Crawler:
             dict_file = open(f'.cache/{dir_name_cache}.cache', 'r')
             self.words_map = json.load(dict_file)
             print(f'Loaded file .cache/{dir_name_cache}.cache')
+            self.files_count = -1
         except:
             self.get_word_frequency(dir_name)
 
@@ -94,3 +97,9 @@ class Crawler:
             json.dump(dict(sorted(self.words_map.items())),file)
         
         return self.words_map
+    
+    def get_files_count(self):
+        """
+        Returns the number of proccesed files
+        """
+        return self.files_count

@@ -39,13 +39,14 @@ class UserInterface:
                     print(f' - {sinonim}: {freq if not freq is None else 0}')
                     if not freq is None:
                         total_freq += freq
-                self.win.total_frequency.setText(str(total_freq))
+                
             else:
                 self.win.list_results.addItem('No se ha encontrado la palabra buscada')
                 total_freq = 0
         else:
             self.win.list_results.addItem('Por favor, busca una palabra')
             total_freq = 0
+        self.win.total_frequency.setText(str(total_freq))
 
     def loadGUI(self):
         """
@@ -54,7 +55,7 @@ class UserInterface:
         app = QtWidgets.QApplication([])
 
         self.win = uic.loadUi("user-interface.ui") #specify the location of your .ui file
-        self.win.setWindowTitle("PC Crawler - Recuperación y busqueda en la web")
+        self.win.setWindowTitle("PC Crawler - RIBW")
         self.win.load_files_btn.clicked.connect(self.get_dir_file)
         self.win.search_button.clicked.connect(self.search_frequency)
 

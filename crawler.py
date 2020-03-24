@@ -1,13 +1,13 @@
 from os import listdir, path
 import sys, re, json, unidecode
-
+from file_parser import Parser
 class Crawler:
 
-    def __init__(self, file_ext_accept, accepted_words,callback_process_file=lambda x:pass):
+    def __init__(self, file_ext_accept, accepted_words):
         self.file_ext_accept = file_ext_accept
         self.accepted_words = accepted_words
         self.words_map = dict()
-        self.callback=callback_process_file
+        self.parser=Parser()
 
     def get_word_frequency(self, name):
         """
@@ -26,23 +26,9 @@ class Crawler:
             else:
                 print(elem)
                 if elem.endswith(self.file_ext_accept):
-                    words=self.callback(elem)
-                    map(lambda word: update_map(word),words)
-
-
-    def process_file(self, file_name):
-        """
-        Process every word in a file
-    
-        Get every word in a file, ignoring case and accents, and update the count of times it appears.
-    
-        Parameters: 
-        file_name (str): name of the file to be processed 
-        """
-        with open(file_name, encoding='utf-8') as file:
-            words = [word.lower() for word in re.split(r'\W+',unidecode.unidecode(file.read()))]
-            for word in words:
-                self.update_map(word)
+                    words=self.parser.process_file(elem)
+                    for word in words:
+                        self.update_map(word)
 
     def update_map(self, word):
         """
@@ -53,10 +39,11 @@ class Crawler:
         Parameters: 
         word (str): word to be processed 
         """
-        if self.words_map.get(word) is None:
-            self.words_map[word] = 1
-        else:
-            self.words_map[word] += 1
+        if word in self.accepted_words:
+            if self.words_map.get(word) is None:
+                self.words_map[word] = 1
+            else:
+                self.words_map[word] += 1
 
     def get_frequencies(self,dir_name):
         """

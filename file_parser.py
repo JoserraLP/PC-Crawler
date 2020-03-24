@@ -6,8 +6,6 @@ import os
 from bs4 import BeautifulSoup as bs
 
 class Parser:
-    def __init__(self,thesaurus_filename):
-        self.thesaurus=thesaurus.createThesaurus(thesaurus_filename)
     def process_file(self,filename):
         extension=os.path.splitext(filename)[-1]
         process_fun_dict={

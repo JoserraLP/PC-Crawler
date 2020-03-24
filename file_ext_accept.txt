@@ -1,2 +1,5 @@
 .txt
 .html
+.xml
+.xlsx
+.pdf

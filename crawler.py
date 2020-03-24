@@ -3,10 +3,11 @@ import sys, re, json, unidecode
 
 class Crawler:
 
-    def __init__(self, file_ext_accept, accepted_words):
+    def __init__(self, file_ext_accept, accepted_words,callback_process_file=lambda x:pass):
         self.file_ext_accept = file_ext_accept
         self.accepted_words = accepted_words
         self.words_map = dict()
+        self.callback=callback_process_file
 
     def get_word_frequency(self, name):
         """
@@ -25,23 +26,9 @@ class Crawler:
             else:
                 print(elem)
                 if elem.endswith(self.file_ext_accept):
-                    self.process_file(elem)
+                    words=self.callback(elem)
+                    map(lambda word: update_map(word),words)
 
-    def get_word_frequency_on_directory(self, directory):
-        """
-        Get the frequency of every word in a directory
-    
-        Parameters: 
-        directory (str): name of the directory to be processed 
-        """
-        for file in listdir(directory):
-            actual_path = directory+'\\'+file
-            if path.isdir(actual_path):
-                self.get_word_frequency_on_directory(actual_path)
-            else:
-                print(actual_path)
-                if actual_path.endswith(self.file_ext_accept):
-                    self.process_file(actual_path)
 
     def process_file(self, file_name):
         """
@@ -66,11 +53,10 @@ class Crawler:
         Parameters: 
         word (str): word to be processed 
         """
-        if word in self.accepted_words:
-            if self.words_map.get(word) is None:
-                self.words_map[word] = 1
-            else:
-                self.words_map[word] += 1
+        if self.words_map.get(word) is None:
+            self.words_map[word] = 1
+        else:
+            self.words_map[word] += 1
 
     def get_frequencies(self,dir_name):
         """

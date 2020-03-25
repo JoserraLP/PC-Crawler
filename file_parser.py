@@ -1,7 +1,6 @@
 import pandas as pd
 import PyPDF2
 import unidecode, re
-import thesaurus
 import os
 from bs4 import BeautifulSoup as bs
 

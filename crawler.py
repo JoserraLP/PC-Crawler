@@ -26,7 +26,7 @@ class Crawler:
             else:
                 print(elem)
                 if elem.endswith(self.file_ext_accept):
-                    words=self.parser.process_file(elem)
+                    words = self.parser.process_file(elem)
                     for word in words:
                         self.update_map(word)
 

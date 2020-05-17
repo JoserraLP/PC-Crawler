@@ -7,6 +7,8 @@ class Crawler:
         self.file_ext_accept = file_ext_accept
         self.accepted_words = accepted_words
         self.words_map = dict()
+        self.file_names=list()
+        self.file_lengths=list()
         self.parser=Parser()
 
     def get_word_frequency(self, name):
@@ -24,13 +26,16 @@ class Crawler:
                 for file in listdir(elem):
                     elems.append(elem + '\\' + str(file))
             else:
-                print(elem)
                 if elem.endswith(self.file_ext_accept):
+                    self.file_names.append(elem)
+                    file_index=len(self.file_names)-1
                     words=self.parser.process_file(elem)
+                    self.file_lengths.append(len(words))
                     for word in words:
-                        self.update_map(word)
+                        self.update_map(word,file_index)
+                        
 
-    def update_map(self, word):
+    def update_map(self, word,file_index):
         """
         Update the word count map  
     
@@ -41,10 +46,19 @@ class Crawler:
         """
         if word in self.accepted_words:
             if self.words_map.get(word) is None:
-                self.words_map[word] = 1
+                self.words_map[word] = dict()
+                wordDict=self.words_map[word]
+                wordDict["frecuencia_total"]=1
+                wordDict["frecuencias_locales"]=dict()
+                wordDict["frecuencias_locales"][file_index]=1
             else:
-                self.words_map[word] += 1
-
+                wordDict=self.words_map[word]
+                wordDict["frecuencia_total"]+=1
+                if wordDict["frecuencias_locales"].get(file_index) is None:
+                    wordDict["frecuencias_locales"][file_index]=1
+                else:
+                    wordDict["frecuencias_locales"][file_index]+=1
+                
     def get_frequencies(self,dir_name):
         """
         Gets frequencies if they have been processed before

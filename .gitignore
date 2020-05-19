@@ -1,3 +1,4 @@
 .cache/*.cache
+.cache/*.files_cache
 *.mp4
 __pycache__/*

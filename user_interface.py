@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, QtCore,uic
 import sys
+import os
 
 class UserInterface:
     """
@@ -21,7 +22,7 @@ class UserInterface:
         self.win.selected_name.setText(act_name)
         if act_name != "":
             self.words_freq = self.crawler.get_frequencies(act_name)
-            print(self.words_freq)
+            # print(self.words_freq)
 
     def search_frequency(self):
         """
@@ -29,20 +30,37 @@ class UserInterface:
         """
         word = self.win.search_text.toPlainText().lower()
         self.win.list_results.clear()
+        self.win.list_sinonimos.clear()
         if not self.words_freq is None and word != '':
             sinonims = self.thesaurus.get(word)
             total_freq = 0
-            if(sinonims is not None):
-                for sinonim in sinonims:
-                    freq = self.words_freq.get(sinonim)
-                    self.win.list_results.addItem(f'{sinonim}: {freq if not freq is None else 0}')
-                    print(f' - {sinonim}: {freq if not freq is None else 0}')
-                    if not freq is None:
-                        total_freq += freq
-                
+            if sinonims is not None:
+
+                # Ranking por proporcion de palabras
+                freq_word = self.words_freq.get(word)
+                files = self.crawler.file_list
+                if freq_word is not None:
+                    freq_locales=freq_word["frecuencias_locales"]
+                    freq_files=list()
+                    for k,v in freq_locales.items():
+                        file=files[int(k)]
+                        
+                        freq_files.append( (file[0],file[1],v) )
+
+                    result=sorted(freq_files,key=lambda x: x[2]/x[1],reverse=True)
+                    for res in result:
+                        self.win.list_results.addItem(f'{os.path.basename(res[0])} => ( Freq: {res[2]}, Score: {100*res[2]/res[1]}% )')
+                    
+                    for sinonim in sinonims:
+                        freq = self.words_freq.get(sinonim)
+                        self.win.list_sinonimos.addItem(f'{sinonim} => {str(freq["frecuencia_total"]) if not freq is None else 0}')
+                        print(f' - {sinonim}: {freq if not freq is None else 0}')
+                        if not freq is None:
+                            total_freq += freq["frecuencia_total"]
+                else:
+                    self.win.list_results.addItem('No se ha encontrado la palabra buscada')
             else:
                 self.win.list_results.addItem('No se ha encontrado la palabra buscada')
-                total_freq = 0
         else:
             self.win.list_results.addItem('Por favor, busca una palabra')
             total_freq = 0

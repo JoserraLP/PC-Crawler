@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>320</height>
+    <height>468</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -25,7 +25,7 @@
   <property name="maximumSize">
    <size>
     <width>400</width>
-    <height>320</height>
+    <height>800</height>
    </size>
   </property>
   <property name="font">
@@ -74,7 +74,15 @@ QPushButton:pressed{
 #results{
 	color:white;
 }
+#sinonimos{
+	color:white;
+}
 #list_results{
+	color:white;
+	background: #222222;
+	border: None;
+}
+#list_sinonimos{
 	color:white;
 	background: #222222;
 	border: None;
@@ -263,8 +271,8 @@ QPushButton:pressed{
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>300</y>
+     <x>60</x>
+     <y>440</y>
      <width>331</width>
      <height>20</height>
     </rect>
@@ -790,6 +798,41 @@ QPushButton:pressed{
     <string>Fichero</string>
    </property>
   </widget>
+  <widget class="QGroupBox" name="sinonimos">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>300</y>
+     <width>381</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Montserrat</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="title">
+    <string>Frecuencia sinónimos</string>
+   </property>
+   <widget class="QListWidget" name="list_sinonimos">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>361</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+   </widget>
+  </widget>
   <zorder>label_2</zorder>
   <zorder>title</zorder>
   <zorder>results</zorder>
@@ -802,6 +845,7 @@ QPushButton:pressed{
   <zorder>is_file</zorder>
   <zorder>selected_name</zorder>
   <zorder>load_files_btn</zorder>
+  <zorder>sinonimos</zorder>
  </widget>
  <resources/>
  <connections/>

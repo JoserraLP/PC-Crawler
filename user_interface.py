@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, QtCore,uic
 import sys
+import os
 
 class UserInterface:
     """
@@ -48,7 +49,7 @@ class UserInterface:
 
                     result=sorted(freq_files,key=lambda x: x[2]/x[1],reverse=True)
                     for res in result:
-                        self.win.list_results.addItem(f'{res[0]} => {res[2]/res[1]}%')
+                        self.win.list_results.addItem(f'{os.path.basename(res[0])} => ( Freq: {res[2]}, Score: {100*res[2]/res[1]}% )')
                     
                     for sinonim in sinonims:
                         freq = self.words_freq.get(sinonim)

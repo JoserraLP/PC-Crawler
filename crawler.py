@@ -8,8 +8,6 @@ class Crawler:
         self.file_ext_accept = file_ext_accept
         self.accepted_words = accepted_words
         self.words_map = dict()
-        self.file_names = list()
-        self.file_lengths = list()
         self.file_list = list()
         self.parser = Parser()
 
@@ -29,10 +27,10 @@ class Crawler:
                     elems.append(elem + '/' + str(file))
             else:
                 if elem.endswith(self.file_ext_accept):
-                    self.file_names.append(elem)
-                    file_index = len(self.file_names)-1
+                    
+                    file_index = len(self.file_list)
                     words = self.parser.process_file(elem)
-                    self.file_lengths.append(len(words))
+                    self.file_list.append((elem,len(words)))
                     for word in words:
                         self.update_map(word, file_index)
                         
@@ -60,8 +58,8 @@ class Crawler:
                     wordDict["frecuencias_locales"][file_index] = 1
                 else:
                     wordDict["frecuencias_locales"][file_index] += 1
-                
-    def get_frequencies(self,dir_name):
+
+    def get_frequencies(self,dir_name):          
         """
         Gets frequencies if they have been processed before
     
@@ -74,16 +72,17 @@ class Crawler:
         dir_name_cache = dir_name.replace('/','').replace('.', '').replace(':', '-')
         try:
             dict_file = open(f'.cache/{dir_name_cache}.cache', 'r')
+            list_file = open(f'.cache/{dir_name_cache}.files_cache', 'r', encoding="utf-8")
+            
             self.words_map = json.load(dict_file)
 
-            list_file = open(f'.cache/{dir_name_cache}.files_cache', 'r', encoding="utf-8")
             self.file_list = ast.literal_eval(list_file.read()) #AST is for tuples
 
             print(f'Loaded file .cache/{dir_name_cache}.cache')
             print(f'Loaded file .cache/{dir_name_cache}.files_cache')
         except:
+            print(dir_name)
             self.get_word_frequency(dir_name)
-            self.file_list = list(zip(self.file_names,self.file_lengths))
 
 
         with open(f'.cache/{dir_name_cache}.cache', "w+") as file:
